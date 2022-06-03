@@ -9,7 +9,7 @@ services:
     volumes:
       - ./sv1:/app
     working_dir: /app
-    command: uvicorn server:app --reload --host 0.0.0.0 --port 8000
+    command: gunicorn -w 2 -k uvicorn.workers.UvicornWorker server:app --bind 0.0.0.0:8000
   
   sv2:
     build: .
