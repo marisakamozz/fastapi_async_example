@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  sv1:
+    build: .
+    container_name: sv1
+    ports:
+      - "3399:8000"
+    volumes:
+      - ./sv1:/app
+    working_dir: /app
+    command: uvicorn server:app --reload --host 0.0.0.0 --port 8000
+  
+  sv2:
+    build: .
+    container_name: sv2
+    volumes:
+      - ./sv2:/app
+    working_dir: /app
+    command: uvicorn server:app --reload --host 0.0.0.0 --port 8000
